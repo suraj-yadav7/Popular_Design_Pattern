@@ -2,7 +2,6 @@
 // The Factory Pattern provides an interface for creating objects in a superclass,
 // but allows subclasses or methods to alter the type of objects that will be created.
 // Instead of using the 'new' keyword directly to create objects, you delegate that responsibility to factory method.
-
 class Samsung{
   constructor(brand, ram, rom){
     this.brand = brand,
