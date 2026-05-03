@@ -19,11 +19,11 @@ class Laptop{
 };
 
 /** Concrete Component */
-
 class BasicLaptop extends Laptop{
   cost(){
     return 25000
   }
+
   specificationDetails(){
     const details = {
       processor:"six core",
@@ -39,7 +39,7 @@ class LaptopDecorator extends Laptop{
   constructor(laptop){
     super()
     this.laptop = laptop
-  }
+  };
 
   cost(){
     return this.laptop.cost()
@@ -55,6 +55,7 @@ class ramAddon extends LaptopDecorator{
   cost(){
     return super.cost()+5000
   }
+
   specificationDetails(){
     return super.specificationDetails.details = {
       processor:"six core",
