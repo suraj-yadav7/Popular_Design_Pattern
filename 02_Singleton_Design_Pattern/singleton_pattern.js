@@ -3,6 +3,28 @@
 // provides a global access point to that instance.
 
 /** Implementation of singleton using class */
+class Singleton {
+	static instance = null
+	constructor(){
+		if(Singleton.instance){
+			return Singleton.instance
+		}
+		Singleton.instance = this
+	}
+
+	static getInstance(){
+		if(!Singleton.instance){
+			Singleton.instance = new Singleton
+		}
+		return Singleton.instance
+	}
+};
+
+const firstInstance 	= Singleton.getInstance()
+const secondInstance 	= Singleton.getInstance()
+console.log("Instance: ", firstInstance === secondInstance)
+
+/** Working Example */
 let count = 1
 class Counter{
     constructor(){
