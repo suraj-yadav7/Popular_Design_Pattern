@@ -5,53 +5,68 @@
 // To achieve loose coupling between objects.
 // To allow multiple parts of an application to react to changes without tight dependencies.
 
-/** Subject */
-class YoutubeChannel{
+/** Observable (Subject) */
+class Channel{
   constructor(){
-    this.users=[]
+    this.usersList = []
+    this.videoData=null
   };
 
-  subscribe(userProfile){
-    this.users.push(userProfile)
+  addSubscriber(newUser){
+    if(!this.usersList.includes(newUser)){
+      this.usersList.push(newUser)
+    }
   };
 
-  unsubscribe(userId){
-    this.users = this.users.filter((elem) => elem !== userId)
+  removeSubscriber(user){
+    this.usersList = this.usersList.filter((elem) => elem !== user)
   };
 
-  notify(data){
-    this.users.forEach((user) => user.notification(data))
+  notify(){
+    this.usersList.forEach((user) => {
+      user.update()
+    })
+  };
+
+  addNewVideo(title){
+    this.videoData =title
+    console.log("New Video Added: ", title)
+    this.notify()
+  };
+
+  getVideoData(){
+    return `Checkout our new Video: ${this.videoData}`
   };
 };
 
 /** Observer */
 class User{
-  constructor(name){
-    this.name=name
-  }
+  constructor(userName, channelName){
+    this.name = userName,
+    this.channel = channelName
+  };
 
-  notification(info){
-    console.log(`${this.name} you have notification:  ${info}`)
-  }
+  update(){
+    console.log("Get Video Data For User: ", this.channel.getVideoData())
+  };
 };
 
-/** Object Creation */
-const sportsYT = new YoutubeChannel()
+/** Channel Object */
+const coderArmy = new Channel()
 
-const userOne = new User("Prabhas")
-const userTwo = new User("Mahesh")
+/** User Object */
+const userOneObj = new User("Shubham", coderArmy)
+const userTwoObj = new User("Manoj", coderArmy)
 
-/** User subscribe to YT channel */
-sportsYT.subscribe(userOne)
-sportsYT.subscribe(userTwo)
-console.log("Subscribers(users) list: ", sportsYT.users)  // Subscribers(users) list:  [ User { name: 'Prabhas' }, User { name: 'Mahesh' } ]
+/** Add Subscribers */
+coderArmy.addSubscriber(userOneObj)
+coderArmy.addSubscriber(userTwoObj)
 
-/** Notification */
-sportsYT.notify("last night SRH vs RCB highlights added.")
-// Output:
-// Prabhas you have notification: last night SRH vs RCB highlights added.
-// Mahesh you have notification:  last night SRH vs RCB highlights added.
+/** Add New Video */
+coderArmy.addNewVideo("SOLID PRINCIPLE")
 
-/** User unsubscribe to YT channel */
-sportsYT.unsubscribe(userTwo)
-console.log("Current Subscribers(users) list: ", sportsYT.users) // Current Subscribers(users) list:  [ User { name: 'Prabhas' } ]
+/** Remove Subscriber */
+coderArmy.removeSubscriber(userOneObj)
+
+/** Again Add New Video */
+coderArmy.addNewVideo("OPEN-CLOSED PRINCIPLE")
