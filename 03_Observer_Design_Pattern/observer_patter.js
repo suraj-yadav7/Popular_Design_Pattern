@@ -1,5 +1,5 @@
 /** OBSERVER DESIGN PATTERN */
-//The Observer Pattern defines a one-to-many relationship between objects so that when one object (called the subject) changes state,
+//The Observer Pattern(behavioral pattern) defines a one-to-many relationship between objects so that when one object (called the subject) changes state,
 // all its dependents (called observers) are notified and updated automatically.
 // To implement event-driven systems.
 // To achieve loose coupling between objects.
