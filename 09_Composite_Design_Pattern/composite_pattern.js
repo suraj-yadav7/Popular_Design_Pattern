@@ -3,13 +3,15 @@
    * that lets you compose objects into tree structures to represent part-whole hierarchies. It allows clients to treat
    * individual objects and groups of objects uniformly through a single interface. */
 
+
   /** Component     Description  */
   // Component  : An interface or abstract class defining operations common to both simple and complex elements.
   // Leaf       : An individual, basic object that has no child elements and implements the Component interface directly.
   // Composite  : A container object that holds child elements (leaves or other composites) and delegates execution to them.
   // Client     : The external system that interacts with your objects strictly via the unified Component interface.
 
-// Abstract class for FileSystemComponent
+
+/** Abstract class for FileSystemComponent */
 class FileSystemComponent {
   constructor(){
     if(new.target === FileSystemComponent){
@@ -54,6 +56,8 @@ class Directory extends FileSystemComponent {
     this.components.push(component);
   }
 };
+
+
 
 // Main function
 const main = () => {
